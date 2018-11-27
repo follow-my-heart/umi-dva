@@ -1,0 +1,16 @@
+// Option3
+.row {
+    width: 400px;
+    border: 1px solid #ccc;
+    display: flex;
+    .left {
+        border-right: 1px solid #ccc;
+        width: 100px;
+    }
+    .right {
+        height: 100%;
+        word-wrap: break-word;
+        word-break: normal;
+        width: calc(~"100% - 100px");
+    }
+}

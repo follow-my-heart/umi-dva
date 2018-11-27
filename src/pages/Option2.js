@@ -1,11 +1,29 @@
+import Schedule from '../components/Schedule/Schedule'
+import { connect } from 'dva';
 
-export default () => {
-  const handleClick = () => {
-
+const mySchedule = ({ schedule, dispatch }) => {
+  const { lessonData, data, today } = schedule;
+  const changeType = (type) => {
+    console.log(type)
+  }
+  const changeNum = (num) => {
+    console.log(num, 'num')
   }
   return (
     <div >
-    2
+      <Schedule
+        phone={true}
+        type='month'
+        data={data}
+        lesson={lessonData}
+        today={today}
+        changeType={changeType}
+        changeNum={changeNum}
+      />
     </div>
   )
 }
+
+export default connect(({ schedule }) => ({
+  schedule,
+}))(mySchedule);

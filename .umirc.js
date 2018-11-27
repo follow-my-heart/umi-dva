@@ -9,7 +9,7 @@ export default {
       dynamicImport: true,
       title: 'umi-dva',
       dll: true,
-      hardSource: true,
+      // hardSource: true,
     }],
   ],
   routes: [
@@ -47,5 +47,14 @@ export default {
         }
       ],
     },
-  ]
+  ],
+  proxy: {
+    "/dayi": {
+      "target": "http://1v1-teacher-test.xueba100.com",
+      // "target": "http://qa33-teacher.xuebadev.com",
+      // "target": 'http://teacher.wenba.com/',
+      "changeOrigin": true
+      // "pathRewrite": { "^/api": "" }
+    }
+  },
 }
