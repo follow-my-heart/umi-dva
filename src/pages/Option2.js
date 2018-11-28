@@ -2,25 +2,31 @@ import Schedule from '../components/Schedule/Schedule'
 import { connect } from 'dva';
 
 const mySchedule = ({ schedule, dispatch }) => {
-  const { lessonData, data, today } = schedule;
-  const changeType = (type) => {
-    console.log(type)
+  const { tid, type, today, input_date, data, lessonData, n, step } = schedule;
+
+  const changeType = (newType) => {
+    dispatch({
+      type: 'schedule/changeData',
+      payload: { tid, step, n: 0, type: newType },
+    })
   }
   const changeNum = (num) => {
-    console.log(num, 'num')
+    dispatch({
+      type: 'schedule/changeData',
+      payload: { tid, type, step: num, n: num === 0 ? 0 : n + num },
+    })
   }
   return (
-    <div >
-      <Schedule
-        phone={true}
-        type='month'
-        data={data}
-        lesson={lessonData}
-        today={today}
-        changeType={changeType}
-        changeNum={changeNum}
-      />
-    </div>
+    <Schedule
+      phone={true}
+      type={type}
+      data={data}
+      lesson={lessonData}
+      today={today}
+      inputDate={input_date}
+      changeType={changeType}
+      changeNum={changeNum}
+    />
   )
 }
 

@@ -1,71 +1,102 @@
-// schedule
-.scheduleHeader {
-    max-width: 490px;
-    width: 100%;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .button {
-        width: 30px;
-        text-align: center;
-        .select {
-            width: 21px;
-            height: 21px;
-            border-radius: 50%;
-            color: #fff;
-            background: #000;
+.schedule {
+    .header {
+        max-width: 490px;
+        width: 100%;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .button {
+            width: 30px;
+            text-align: center;
+            cursor: pointer;
+            .select {
+                width: 21px;
+                height: 21px;
+                border-radius: 50%;
+                color: #fff;
+                background: #000;
+            }
+        }
+        .cell {
+            width: 60px;
+            text-align: center;
+            cursor: pointer;
         }
     }
-    .cell {
-        width: 60px;
-        text-align: center;
-    }
-}
-
-.today {
-    padding-left: 20px;
-}
-
-// month
-.headerWeek {
-    max-width: 490px;
-    width: 100%;
-    height: 60px;
-    display: flex;
-    .weekGrid {
-        height: 60px;
-        line-height: 60px;
-        text-align: center;
-        width: 100%;
+    .today {
+        padding-left: 4%;
     }
 }
 
 .month {
-    max-width: 490px;
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    .monthGird {
+    .header {
+        max-width: 490px;
+        width: 100%;
         height: 60px;
-        line-height: 60px;
-        text-align: center;
-        width: 14.285%;
-        .day {
-            height: 40px;
-            line-height: 40px;
+        display: flex;
+        .weekGrid {
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            width: 100%;
         }
-        .lesson {
-            height: 20px;
-            line-height: 20px;
-            width: 40px;
-            margin: 0 auto;
+    }
+    .content {
+        max-width: 490px;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        .monthGird {
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            width: 14.285%;
+            .day {
+                height: 40px;
+                line-height: 40px;
+            }
+            .lesson {
+                height: 20px;
+                line-height: 20px;
+                width: 40px;
+                margin: 0 auto;
+                font-size: 10px;
+                .cell {
+                    width: 6px;
+                    height: 6px;
+                    margin: 2px;
+                }
+            }
+        }
+    }
+}
+
+.week {
+    .header {
+        max-width: 490px;
+        width: 100%;
+        height: 30px;
+        display: flex;
+        padding-top: 16px;
+        .weekGrid {
+            height: 30px;
+            text-align: center;
+            width: 100%;
+        }
+    }
+    .content {
+        max-width: 490px;
+        width: 100%;
+        display: flex;
+        .weekGrid {
+            height: 100%;
+            text-align: center;
+            width: 100%;
             font-size: 10px;
-            .cell {
-                width: 6px;
-                height: 6px;
-                margin: 2px;
-                background: #000;
+            .lessonGird {
+                display: flex;
+                
             }
         }
     }
