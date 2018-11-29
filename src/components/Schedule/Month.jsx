@@ -3,10 +3,12 @@ import styles from './schedule.less'
 const header = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'].map(v =>
     <div key={v} className={styles.weekGrid}>{v}</div>);
 
-const Month = ({ data, lesson, today, phone }) => {
+const Month = ({ data, lesson, today, phone, onClick }) => {
     if (data) {
         const gird = data.map(_v => {
             let cell = [], text = '', detail = [], color = _v.this_month ? '#000' : '#ccc';
+            let day = typeof (_v.day) === 'number' ? _v.day : _v.day.slice(1);
+            if (_v.time === today) day = '今天';
             if (lesson) {
                 lesson.forEach(value => {
                     if (value.day === _v.time) detail = value.course;
@@ -18,9 +20,10 @@ const Month = ({ data, lesson, today, phone }) => {
             }
             return <div className={styles.monthGird}
                 key={_v.time}
-                style={{ color, background: _v.time === today ? '#eee' : '#fff' }}
+                onClick={() => onClick(detail, _v)}
+                style={{ color, background: _v.time === today ? ' rgb(247, 247, 247)' : '#fff' }}
             >
-                <div className={styles.day}>{typeof (_v.day) === 'number' ? _v.day : _v.day.slice(1)}</div>
+                <div className={styles.day}>{day}</div>
                 <div className={styles.lesson}>{phone ? cell : text}</div>
             </div>
         });

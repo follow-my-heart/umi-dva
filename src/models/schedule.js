@@ -27,7 +27,7 @@ export default {
     // 异步行为
     effects: {
         *changeData({ payload }, { call, put }) {
-            const { tid, type, n, step } = payload;
+            const { tid, type, n, step, detail } = payload;
             const calendarData = type === 'weeks'
                 ? formatWeekData(countDateTag(type, new Date(), n))
                 : formatMonthData(countDateTag(type, new Date(), n))
@@ -37,7 +37,7 @@ export default {
             yield put({
                 type: 'updateData',
                 payload: {
-                    tid, type, date: calendarData, n, step,
+                    tid, type, date: calendarData, n, step, detail,
                     // lesson: res.data.data.courses,
                     lesson: lesson.data.courses,
                 },

@@ -105,3 +105,19 @@ export const formatWeekData = date => {
 export const formatWeekIndex = n => n === 0 ? 6 : n - 1;
 
 export const repairNum = n => n < 10 ? `0${n}` : n;
+
+export const formatInterval = (s, e) => {
+    let section = '';
+    const start = moment(new Date(s)).format('HH:mm');
+    const end = moment(new Date(e)).format('HH:mm');
+    const startTime = new Date(s).getHours();
+    if (startTime < 12) section = 'morning';
+    else if (startTime < 18) section = 'afternoon';
+    else section = 'night';
+    return {
+        interval: `${start}-${end}`,
+        start,
+        end,
+        section,
+    }
+}
