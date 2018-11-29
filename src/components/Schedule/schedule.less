@@ -1,16 +1,17 @@
 .schedule {
     .header {
-        max-width: 490px;
+        max-width: 560px;
         width: 100%;
         height: 60px;
         display: flex;
         align-items: center;
         justify-content: center;
         .button {
-            width: 30px;
+            width: 31px;
             text-align: center;
             cursor: pointer;
             .select {
+                margin: 0 5px;
                 width: 21px;
                 height: 21px;
                 border-radius: 50%;
@@ -31,7 +32,7 @@
 
 .month {
     .header {
-        max-width: 490px;
+        max-width: 560px;
         width: 100%;
         height: 60px;
         display: flex;
@@ -43,7 +44,7 @@
         }
     }
     .content {
-        max-width: 490px;
+        max-width: 560px;
         width: 100%;
         display: flex;
         flex-wrap: wrap;
@@ -59,13 +60,14 @@
             .lesson {
                 height: 20px;
                 line-height: 20px;
-                width: 40px;
-                margin: 0 auto;
                 font-size: 10px;
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
                 .cell {
                     width: 6px;
                     height: 6px;
-                    margin: 2px;
+                    margin: 1px;
                 }
             }
         }
@@ -74,7 +76,7 @@
 
 .week {
     .header {
-        max-width: 490px;
+        max-width: 560px;
         width: 100%;
         height: 30px;
         display: flex;
@@ -86,7 +88,7 @@
         }
     }
     .content {
-        max-width: 490px;
+        max-width: 560px;
         width: 100%;
         display: flex;
         .weekGrid {
@@ -94,9 +96,9 @@
             text-align: center;
             width: 100%;
             font-size: 10px;
-            .lessonGird {
+            .lessonColumn {
                 display: flex;
-                
+                flex-direction: column;
             }
         }
     }

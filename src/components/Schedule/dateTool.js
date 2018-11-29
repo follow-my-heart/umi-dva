@@ -1,7 +1,7 @@
 let moment = require('moment');
 /**
  * @param {Date} date - Date()对象
- * @returns {{input_date: string, start_time: string, end_time: string, data: [{time: string, this_month: boolean, year: number, month: number, day: number}]}
+ * @returns {{inputDate: string, start_time: string, end_time: string, data: [{time: string, this_month: boolean, year: number, month: number, day: number}]}
  */
 export const formatMonthData = date => {
     const year = date.getFullYear();
@@ -59,7 +59,7 @@ export const formatMonthData = date => {
         })
     }
     return {
-        input_date: moment(date).format('YYYY-MM-DD'),
+        inputDate: moment(date).format('YYYY-MM-DD'),
         start_time: data[0].time,
         end_time: data[41].time,
         data,
@@ -79,7 +79,7 @@ export const countDateTag = (type, date, n) => {
 
 /**
  * @param {Date} date - Date()对象
- * @returns {{input_date: string, start_time: string, end_time: string, data: [{time: string, year: number, month: number, day: number}]}
+ * @returns {{inputDate: string, start_time: string, end_time: string, data: [{time: string, year: number, month: number, day: number}]}
  */
 export const formatWeekData = date => {
     const weekNum = formatWeekIndex(date.getDay());
@@ -95,7 +95,7 @@ export const formatWeekData = date => {
         })
     }
     return {
-        input_date: moment(date).format('YYYY-MM-DD'),
+        inputDate: moment(date).format('YYYY-MM-DD'),
         start_time: data[0].time,
         end_time: data[6].time,
         data,

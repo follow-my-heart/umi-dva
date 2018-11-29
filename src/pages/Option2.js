@@ -2,7 +2,7 @@ import Schedule from '../components/Schedule/Schedule'
 import { connect } from 'dva';
 
 const mySchedule = ({ schedule, dispatch }) => {
-  const { tid, type, today, input_date, data, lessonData, n, step } = schedule;
+  const { tid, type, today, date, lesson, n, step } = schedule;
 
   const changeType = (newType) => {
     dispatch({
@@ -18,12 +18,11 @@ const mySchedule = ({ schedule, dispatch }) => {
   }
   return (
     <Schedule
-      phone={true}
+      // phone={true}
       type={type}
-      data={data}
-      lesson={lessonData}
+      date={date}
+      lesson={lesson}
       today={today}
-      inputDate={input_date}
       changeType={changeType}
       changeNum={changeNum}
     />

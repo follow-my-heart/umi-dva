@@ -5,13 +5,17 @@ const header = ['周一', '周二', '周三', '周四', '周五', '周六', '周
 
 export const Week = ({ data, lesson, today, phone }) => {
     if (data) {
-        console.log(data, lesson, today);
-        const gird = data.map(v => {
-            let lessonDetail = [];
-            return <div key={v.time} className={styles.weekGrid}>
-                <div>{`${v.month}.${v.day}`}</div>
-                <div className={styles.lessonGird}></div>
-                {lessonDetail}
+        const gird = data.map(_v => {
+            let detail = [], gird = [];
+            if (lesson) {
+                lesson.forEach(value => {
+                    if (value.day === _v.time) detail = value.course;
+                });
+            }
+            return <div key={_v.time} className={styles.weekGrid}>
+                <div>{`${_v.month}.${_v.day}`}</div>
+                <div className={styles.lessonColumn}>
+                </div>
             </div>
         })
 

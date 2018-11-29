@@ -2,12 +2,12 @@ import Month from './Month'
 import Week from './Week'
 import styles from './schedule.less'
 
-const Schedule = ({ data, lesson, today, type, changeType, changeNum, phone, inputDate }) => {
-    if (data && inputDate) {
+const Schedule = ({ date, lesson, today, type, changeType, changeNum, phone }) => {
+    if (date) {
+        const { data, inputDate } = date;
         const header = <div className={styles.header}>
             {
-                [{ key: 'weeks', value: '周' },
-                { key: 'months', value: '月' }].map(v =>
+                [{ key: 'weeks', value: '周' }, { key: 'months', value: '月' }].map(v =>
                     <div className={styles.button} onClick={() => changeType(v.key)} key={v.key}>
                         <div className={type === v.key ? styles.select : null}>{v.value}</div>
                     </div>
@@ -23,9 +23,7 @@ const Schedule = ({ data, lesson, today, type, changeType, changeNum, phone, inp
             <div className={styles.today}>{`${todayArr[0]}年${todayArr[1]}月`}</div>
             {type === 'weeks'
                 ? <Week data={data} lesson={lesson} today={today} phone={phone} />
-                : <Month data={data} lesson={lesson} today={today}
-                    phone={phone}
-                />
+                : <Month data={data} lesson={lesson} today={today} phone={phone} />
             }
         </div>
     } else return null
