@@ -4,10 +4,9 @@ import { formatInterval } from './dateTool'
 const header = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'].map(v =>
     <div key={v} className={styles.weekGrid}>{v}</div>);
 
-export const Week = ({ data, lesson, today, phone, onClick }) => {
+export const PhoneWeek = ({ data, lesson, today, phone, onClick }) => {
     if (data) {
-        const gird = data.map(_v => {
-
+        const content = data.map(_v => {
             let detail = [], gird = [];
             if (lesson) {
                 lesson.forEach(value => {
@@ -30,10 +29,24 @@ export const Week = ({ data, lesson, today, phone, onClick }) => {
             </div>
         })
 
-        return <div className={styles.week}>
+        return <div className={styles.phoneWeek}>
             <div className={styles.header}>{header}</div>
-            <div className={styles.content}>{gird}</div>
+            <div className={styles.content}>{content}</div>
         </div>
     } else return null
 };
-export default Week;
+
+
+export const PcWeek = ({ data, lesson, today, phone, onClick }) => {
+    if (data) {
+        const content = data.map(_v => {
+            return <div key={_v.time} className={styles.weekGrid}>
+                <div>{`${_v.month}.${_v.day}`}</div>
+            </div>
+        })
+        return <div className={styles.pcWeek}>
+            <div className={styles.header}>{header}</div>
+            <div className={styles.content}>{content}</div>
+        </div>
+    } else return null
+};

@@ -40,7 +40,7 @@ const mySchedule = ({ schedule, dispatch }) => {
   return (
     <div>
       <Schedule
-        // phone={true}
+        phone={true}
         type={type}
         date={date}
         lesson={lesson}
