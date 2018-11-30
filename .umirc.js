@@ -8,7 +8,10 @@ export default {
       dva: true,
       dynamicImport: true,
       title: 'umi-dva',
-      dll: true,
+      dll: {
+        exclude: [],
+        include: ["dva", "dva/router", "dva/saga", "dva/fetch", "antd/es"]
+      },
       // hardSource: true,
     }],
   ],

@@ -1,8 +1,11 @@
 let moment = require('moment');
+
 /**
+ * @function formatMonthData - 输入时间戳, 输出对应月份的日期数据
  * @param {Date} date - Date()对象
- * @returns {{inputDate: string, start_time: string, end_time: string, data: [{time: string, this_month: boolean, year: number, month: number, day: number}]}
+ * @returns {{inputDate: string, startTime: string, endTime: string, data: [{time: string, thisMonth: boolean, year: number, month: number, day: number}]}
  */
+
 export const formatMonthData = date => {
     const year = date.getFullYear();
     const month = date.getMonth();
@@ -34,7 +37,7 @@ export const formatMonthData = date => {
     for (let i = 0; i < firstDayWeekIndex; i++) {
         data.push({
             time: `${startYear}-${startMonth}-${startDay + i}`,
-            this_month: false,
+            thisMonth: false,
             year: startYear,
             month: startMonth,
             day: startDay + i,
@@ -43,7 +46,7 @@ export const formatMonthData = date => {
     for (let i = 0; i < monthDay; i++) {
         data.push({
             time: `${year}-${repairNum(month + 1)}-${repairNum(1 + i)}`,
-            this_month: true,
+            thisMonth: true,
             year,
             month: repairNum(month + 1),
             day: repairNum(1 + i),
@@ -52,7 +55,7 @@ export const formatMonthData = date => {
     for (let i = 0; i < endDay; i++) {
         data.push({
             time: `${endYear}-${endMonth}-${repairNum(1 + i)}`,
-            this_month: false,
+            thisMonth: false,
             year: endYear,
             month: endMonth,
             day: repairNum(1 + i),
@@ -60,13 +63,14 @@ export const formatMonthData = date => {
     }
     return {
         inputDate: moment(date).format('YYYY-MM-DD'),
-        start_time: data[0].time,
-        end_time: data[41].time,
+        startTime: data[0].time,
+        endTime: data[41].time,
         data,
     }
 };
 
 /**
+ * @function countDateTag - 计算点击 上下周/月的Date对象
  * @param {'weeks'|'months'} type - 周 | 月
  * @param {Date} date - Date()对象
  * @param {number} n - 上下周/月计数 
@@ -78,9 +82,11 @@ export const countDateTag = (type, date, n) => {
 };
 
 /**
+ * @function formatWeekData - 输入时间戳, 输出对应周的日期数据
  * @param {Date} date - Date()对象
- * @returns {{inputDate: string, start_time: string, end_time: string, data: [{time: string, year: number, month: number, day: number}]}
+ * @returns {{inputDate: string, startTime: string, endTime: string, data: [{time: string, year: number, month: number, day: number}]}
  */
+
 export const formatWeekData = date => {
     const weekNum = formatWeekIndex(date.getDay());
     let inputDay = moment(date);
@@ -96,15 +102,25 @@ export const formatWeekData = date => {
     }
     return {
         inputDate: moment(date).format('YYYY-MM-DD'),
-        start_time: data[0].time,
-        end_time: data[6].time,
+        startTime: data[0].time,
+        endTime: data[6].time,
         data,
     }
 };
+/**@function formatWeekIndex - 周一到周日序列*/
 
 export const formatWeekIndex = n => n === 0 ? 6 : n - 1;
 
+/**@function repairNum - 数字补零*/
+
 export const repairNum = n => n < 10 ? `0${n}` : n;
+
+/**
+ * @function formatInterval - 格式化开始结束时间, 区分上午下午晚上
+ * @param {string} s - 开始时间
+ * @param {string} e - 结束时间
+ * @returns {{interval: string, start: string, end: string, section: string}} - 标记时间Date对象
+ */
 
 export const formatInterval = (s, e) => {
     let section = '';

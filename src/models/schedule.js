@@ -1,7 +1,7 @@
 import queryString from 'query-string'
 import { getSchedule } from '../services/api'
-import { formatMonthData, formatWeekData, countDateTag } from '../components/Schedule/dateTool'
-import lesson from '../components/Schedule/lesson'
+import { formatMonthData, formatWeekData, countDateTag } from '../utils/dateTool'
+import lesson from '../services/lesson'
 let moment = require('moment');
 
 export default {
@@ -31,17 +31,17 @@ export default {
             const calendarData = type === 'weeks'
                 ? formatWeekData(countDateTag(type, new Date(), n))
                 : formatMonthData(countDateTag(type, new Date(), n))
-            const { start_time, end_time } = calendarData;
-            // const res = yield call(getSchedule, JSON.stringify({ start_time, end_time, tid }));
+            const { startTime, endTime } = calendarData;
+            // const res = yield call(getSchedule, JSON.stringify({ startTime: '2016-10-29', endTime: '2018-12-09', tid }));
             // if (res.data && res.data.data && res.data.data.courses) {
-            yield put({
-                type: 'updateData',
-                payload: {
-                    tid, type, date: calendarData, n, step, detail,
-                    // lesson: res.data.data.courses,
-                    lesson: lesson.data.courses,
-                },
-            });
+                yield put({
+                    type: 'updateData',
+                    payload: {
+                        tid, type, date: calendarData, n, step, detail,
+                        // lesson: res.data.data.courses,
+                        lesson: lesson.data.courses,
+                    },
+                });
             // }
         },
     },
