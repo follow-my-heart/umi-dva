@@ -3,7 +3,7 @@ import styles from '../schedule.less'
 const header = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'].map(v =>
     <div key={v} className={styles.weekGrid}>{v}</div>);
 
-const PcWeek = ({ data, lesson, today, phone, onClick }) => {
+const PcWeek = ({ data, lesson, today, onClick }) => {
     if (data) {
         const content = data.map(_v => {
             return <div key={_v.time} className={styles.weekGrid}>

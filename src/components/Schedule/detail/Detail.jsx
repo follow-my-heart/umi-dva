@@ -1,11 +1,10 @@
 import styles from '../schedule.less'
 import { formatInterval } from '../../../utils/dateTool'
 
-
 export const Detail = ({ detail }) => {
     if (detail) {
         const list = detail.course.map((_v, i) => {
-            const lessonTime = formatInterval(_v.startTime * 1000, _v.endTime * 1000);
+            const lessonTime = formatInterval(_v.start_time * 1000, _v.end_time * 1000);
             return <div key={i} className={styles.item}>
                 <div className={styles.subtitle}>{lessonTime.interval}</div>
                 <div className={styles.card}>{_v.true_name}</div>

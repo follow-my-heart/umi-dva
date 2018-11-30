@@ -24,7 +24,7 @@ export default {
             });
         },
     },
-    // 异步行为
+    
     effects: {
         *changeData({ payload }, { call, put }) {
             const { tid, type, n, step, detail } = payload;
@@ -32,7 +32,7 @@ export default {
                 ? formatWeekData(countDateTag(type, new Date(), n))
                 : formatMonthData(countDateTag(type, new Date(), n))
             const { startTime, endTime } = calendarData;
-            // const res = yield call(getSchedule, JSON.stringify({ startTime: '2016-10-29', endTime: '2018-12-09', tid }));
+            // const res = yield call(getSchedule, JSON.stringify({ start_time: startTime, end_time: endTime, tid }));
             // if (res.data && res.data.data && res.data.data.courses) {
                 yield put({
                     type: 'updateData',

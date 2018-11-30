@@ -1,4 +1,6 @@
-import Schedule from '../components/Schedule/Schedule'
+import PhoneSchedule from '../components/Schedule/schedule/PhoneSchedule'
+import PcSchedule from '../components/Schedule/schedule/PcSchedule'
+
 import { connect } from 'dva';
 
 const mySchedule = ({ schedule, dispatch }) => {
@@ -18,7 +20,6 @@ const mySchedule = ({ schedule, dispatch }) => {
   }
   const onClick = (course, date) => {
     console.log(course, date)
-    // pc
     if (type === 'weeks') {
 
     } else {
@@ -27,20 +28,19 @@ const mySchedule = ({ schedule, dispatch }) => {
         payload: { tid, type, step, n, detail: { course, date } },
       })
     }
-    // phone
-    if (type === 'weeks') {
-
-    } else {
-      // dispatch({
-      //   type: 'schedule/changeData',
-      //   payload: { tid, type, step, n },
-      // })
-    }
   }
   return (
     <div>
-      <Schedule
-        phone={true}
+      <PhoneSchedule
+        type={type}
+        date={date}
+        lesson={lesson}
+        today={today}
+        changeType={changeType}
+        changeNum={changeNum}
+        onClick={onClick}
+      />
+      {/* <PcSchedule
         type={type}
         date={date}
         lesson={lesson}
@@ -49,9 +49,8 @@ const mySchedule = ({ schedule, dispatch }) => {
         changeNum={changeNum}
         onClick={onClick}
         detail={detail}
-      />
+      /> */}
     </div>
-
   )
 }
 
