@@ -14,7 +14,7 @@ const Month = ({ data, today, onClick }) => {
                 `${value.thisMonth ? styles.thisMonth : ''}`,
                 `${value.isSelect ? styles.select : ''}`
             ].join(' ')}
-                key={value.time}
+                key={key}
                 onClick={() => onClick(value, key)}
             >
                 <div className={styles.day}>{value.day}</div>

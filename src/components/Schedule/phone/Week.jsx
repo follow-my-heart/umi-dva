@@ -19,7 +19,7 @@ const Week = ({ data, today, onClick }) => {
                     </div>)
                 })
             }
-            content.push(<div key={value.time} className={styles.weekGrid}>
+            content.push(<div key={key} className={styles.weekGrid}>
                 <div>{`${value.day}`}</div>
                 <div className={styles.lessonColumn}>
                     {gird}

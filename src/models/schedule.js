@@ -1,5 +1,7 @@
 import queryString from 'query-string'
 import { getSchedule } from '../services/api'
+import lesson from '../services/lesson'
+
 import { formatMonthData, formatWeekData, countDateTag } from '../utils/dateTool'
 let moment = require('moment');
 
@@ -50,10 +52,11 @@ export default {
             if (data.has(today)) {
                 data.set(today, { ...data.get(today), isSelect: true, day: '今天' })
             }
-            const res = yield call(getSchedule, JSON.stringify({ start_time: startTime, end_time: endTime, tid }));
-            if (res.data && res.data.data && res.data.data.courses) {
-                data = formatLessonData(calendarData.data, res.data.data.courses);
-            }
+            // const res = yield call(getSchedule, JSON.stringify({ start_time: startTime, end_time: endTime, tid }));
+            // if (res.data && res.data.data && res.data.data.courses) {
+            //     data = formatLessonData(calendarData.data, res.data.data.courses);
+            // }
+            data = formatLessonData(calendarData.data, lesson.data.courses);
             yield put({
                 type: 'updateData',
                 payload: {
