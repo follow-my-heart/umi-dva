@@ -1,4 +1,4 @@
-import styles from '../schedule.less'
+import styles from '../phoneSchedule.less'
 
 export const Header = ({ date, type, changeType, changeNum }) => {
     if (date) {

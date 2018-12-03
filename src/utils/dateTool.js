@@ -33,38 +33,46 @@ export const formatMonthData = date => {
     const endMonth = repairNum(nextMonthDate.getMonth() + 1);
     const endDay = repairNum(42 - dayNum);
     // 日历数组
-    let data = [];
+    let data = new Map();
+    let time = '';
     for (let i = 0; i < firstDayWeekIndex; i++) {
-        data.push({
-            time: `${startYear}-${startMonth}-${startDay + i}`,
+        time = `${startYear}-${startMonth}-${startDay + i}`;
+        data.set(time, {
+            time,
             thisMonth: false,
+            isSelect: false,
             year: startYear,
             month: startMonth,
             day: startDay + i,
         })
     }
     for (let i = 0; i < monthDay; i++) {
-        data.push({
-            time: `${year}-${repairNum(month + 1)}-${repairNum(1 + i)}`,
+        time = `${year}-${repairNum(month + 1)}-${repairNum(1 + i)}`;
+        data.set(time, {
+            time,
             thisMonth: true,
+            isSelect: false,
             year,
             month: repairNum(month + 1),
-            day: repairNum(1 + i),
+            day: 1 + i,
         })
     }
     for (let i = 0; i < endDay; i++) {
-        data.push({
-            time: `${endYear}-${endMonth}-${repairNum(1 + i)}`,
+        time = `${endYear}-${endMonth}-${repairNum(1 + i)}`;
+        data.set(time, {
+            time,
             thisMonth: false,
+            isSelect: false,
             year: endYear,
             month: endMonth,
-            day: repairNum(1 + i),
+            day: 1 + i,
         })
     }
+
     return {
         inputDate: moment(date).format('YYYY-MM-DD'),
-        startTime: data[0].time,
-        endTime: data[41].time,
+        startTime: [...data.values()][0].time,
+        endTime: [...data.values()][41].time,
         data,
     }
 };
@@ -90,20 +98,23 @@ export const countDateTag = (type, date, n) => {
 export const formatWeekData = date => {
     const weekNum = formatWeekIndex(date.getDay());
     let inputDay = moment(date);
-    let data = [];
+    let data = new Map();
+    let time = '';
     for (let i = 0; i < 7; i++) {
-        inputDay = moment(date).add(i - weekNum, 'days')
-        data.push({
-            time: inputDay.format('YYYY-MM-DD'),
+        inputDay = moment(date).add(i - weekNum, 'days');
+        time = inputDay.format('YYYY-MM-DD');
+        data.set(time, {
+            time,
             year: inputDay.format('YYYY'),
             month: inputDay.format('MM'),
-            day: inputDay.format('DD'),
+            day: inputDay.format('MM.DD'),
         })
     }
+
     return {
         inputDate: moment(date).format('YYYY-MM-DD'),
-        startTime: data[0].time,
-        endTime: data[6].time,
+        startTime: [...data.values()][0].time,
+        endTime: [...data.values()][6].time,
         data,
     }
 };

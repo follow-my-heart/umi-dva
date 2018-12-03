@@ -1,9 +1,9 @@
-import styles from '../schedule.less'
+import styles from '../pcSchedule.less'
 import { formatInterval } from '../../../utils/dateTool'
 
 export const Detail = ({ detail }) => {
     if (detail) {
-        const list = detail.course.map((_v, i) => {
+        const list = [...detail.values()].course.map((_v, i) => {
             const lessonTime = formatInterval(_v.start_time * 1000, _v.end_time * 1000);
             return <div key={i} className={styles.item}>
                 <div className={styles.subtitle}>{lessonTime.interval}</div>
@@ -12,7 +12,7 @@ export const Detail = ({ detail }) => {
         }
         )
         return <div className={styles.detail}>
-            <div className={styles.detailHeader}>{detail.date.time}</div>
+            <div className={styles.detailHeader}>{detail.time.time}</div>
             <div className={styles.list}>{list}</div>
         </div>
     } else return null

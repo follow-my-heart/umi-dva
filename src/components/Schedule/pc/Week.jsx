@@ -1,9 +1,9 @@
-import styles from '../schedule.less'
+import styles from '../pcSchedule.less'
 
 const header = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'].map(v =>
     <div key={v} className={styles.weekGrid}>{v}</div>);
 
-const PcWeek = ({ data, lesson, today, onClick }) => {
+const Week = ({ data, lesson, today, onClick }) => {
     if (data) {
         const content = data.map(_v => {
             return <div key={_v.time} className={styles.weekGrid}>
@@ -16,4 +16,4 @@ const PcWeek = ({ data, lesson, today, onClick }) => {
         </div>
     } else return null
 };
-export default PcWeek;
+export default Week;

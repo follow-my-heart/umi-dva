@@ -1,16 +1,30 @@
 import queryString from 'query-string'
 import { getSchedule } from '../services/api'
 import { formatMonthData, formatWeekData, countDateTag } from '../utils/dateTool'
-import lesson from '../services/lesson'
 let moment = require('moment');
 
+const formatLessonData = (date, lesson) => {
+    let data = date;
+    if (lesson && lesson.length > 0) {
+        lesson.map(v => {
+            if (data.has(v.day)) {
+                data.set(v.day, {
+                    ...date.get(v.day),
+                    course: v.course,
+                    text: `${v.course.length}节课`,
+                })
+            }
+        })
+    }
+    return data
+}
+const today = moment(new Date()).format('YYYY-MM-DD');
 export default {
 
     namespace: 'schedule',
 
     state: {
-        tid: null,
-        today: moment(new Date()).format('YYYY-MM-DD'),
+        tid: null, today, selectKey: today
     },
 
     subscriptions: {
@@ -19,12 +33,12 @@ export default {
                 const query = queryString.parse(search);
                 dispatch({
                     type: 'changeData',
-                    payload: { tid: query.tid, n: 0, type: 'weeks' },
+                    payload: { tid: query.tid, n: 0, type: 'weeks', selectKey: today },
                 });
             });
         },
     },
-    
+
     effects: {
         *changeData({ payload }, { call, put }) {
             const { tid, type, n, step, detail } = payload;
@@ -32,17 +46,27 @@ export default {
                 ? formatWeekData(countDateTag(type, new Date(), n))
                 : formatMonthData(countDateTag(type, new Date(), n))
             const { startTime, endTime } = calendarData;
-            // const res = yield call(getSchedule, JSON.stringify({ start_time: startTime, end_time: endTime, tid }));
-            // if (res.data && res.data.data && res.data.data.courses) {
-                yield put({
-                    type: 'updateData',
-                    payload: {
-                        tid, type, date: calendarData, n, step, detail,
-                        // lesson: res.data.data.courses,
-                        lesson: lesson.data.courses,
-                    },
-                });
-            // }
+            let data = calendarData.data;
+            if (data.has(today)) {
+                data.set(today, { ...data.get(today), isSelect: true, day: '今天' })
+            }
+            const res = yield call(getSchedule, JSON.stringify({ start_time: startTime, end_time: endTime, tid }));
+            if (res.data && res.data.data && res.data.data.courses) {
+                data = formatLessonData(calendarData.data, res.data.data.courses);
+            }
+            yield put({
+                type: 'updateData',
+                payload: {
+                    tid, type, n, step, detail,
+                    date: { ...calendarData, data }
+                },
+            });
+        },
+        *changeSelect({ payload }, { put }) {
+            yield put({
+                type: 'updateData',
+                payload,
+            });
         },
     },
     reducers: {

@@ -1,18 +1,16 @@
-import styles from '../schedule.less'
+import styles from './schedule.less'
 import { formatInterval } from '../../../utils/dateTool'
 
 const header = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'].map(v =>
     <div key={v} className={styles.weekGrid}>{v}</div>);
 
-const PhoneWeek = ({ data, lesson, today, onClick }) => {
+const Week = ({ data, today, onClick }) => {
     if (data) {
-        const content = data.map(_v => {
-            let detail = [], gird = [];
-            if (lesson) {
-                lesson.forEach(value => {
-                    if (value.day === _v.time) detail = value.course;
-                });
-                detail.map((item, i) => {
+        let content = [];
+        data.forEach((value, key) => {
+            let gird = [];
+            if (value.course) {
+                value.course.map((item, i) => {
                     const lessonTime = formatInterval(item.start_time * 1000, item.end_time * 1000);
                     gird.push(<div key={i} className={styles[lessonTime.section]} onClick={() => onClick(item, lessonTime)}>
                         <div>姓名</div>
@@ -21,12 +19,12 @@ const PhoneWeek = ({ data, lesson, today, onClick }) => {
                     </div>)
                 })
             }
-            return <div key={_v.time} className={styles.weekGrid}>
-                <div>{`${_v.month}.${_v.day}`}</div>
+            content.push(<div key={value.time} className={styles.weekGrid}>
+                <div>{`${value.day}`}</div>
                 <div className={styles.lessonColumn}>
                     {gird}
                 </div>
-            </div>
+            </div>)
         })
 
         return <div className={styles.phoneWeek}>
@@ -36,4 +34,4 @@ const PhoneWeek = ({ data, lesson, today, onClick }) => {
     } else return null
 };
 
-export default PhoneWeek;
+export default Week;

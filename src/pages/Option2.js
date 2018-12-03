@@ -1,55 +1,49 @@
-import PhoneSchedule from '../components/Schedule/schedule/PhoneSchedule'
-import PcSchedule from '../components/Schedule/schedule/PcSchedule'
+import Schedule from '../components/Schedule/phone/Schedule'
 
 import { connect } from 'dva';
 
 const mySchedule = ({ schedule, dispatch }) => {
-  const { tid, type, today, date, lesson, n, step, detail } = schedule;
 
+  const { tid, type, today, date, n, step, detail, selectKey } = schedule;
+  let { data } = date;
   const changeType = (newType) => {
     dispatch({
       type: 'schedule/changeData',
       payload: { tid, step, detail, n: 0, type: newType },
     })
   }
+
   const changeNum = (num) => {
     dispatch({
       type: 'schedule/changeData',
       payload: { tid, type, detail, step: num, n: num === 0 ? 0 : n + num },
     })
   }
-  const onClick = (course, date) => {
-    console.log(course, date)
+
+  const onClick = (value, key) => {
     if (type === 'weeks') {
 
     } else {
+      if (key === selectKey) return;
+      data.set(key, { ...data.get(key), isSelect: true });
+      if (selectKey) data.set(selectKey, { ...data.get(selectKey), isSelect: false });
       dispatch({
-        type: 'schedule/changeData',
-        payload: { tid, type, step, n, detail: { course, date } },
+        type: 'schedule/changeSelect',
+        payload: { detail: value, selectKey: key, date },
       })
     }
   }
   return (
     <div>
-      <PhoneSchedule
+      <Schedule
         type={type}
         date={date}
-        lesson={lesson}
         today={today}
         changeType={changeType}
         changeNum={changeNum}
         onClick={onClick}
+        selectKey={selectKey}
       />
-      {/* <PcSchedule
-        type={type}
-        date={date}
-        lesson={lesson}
-        today={today}
-        changeType={changeType}
-        changeNum={changeNum}
-        onClick={onClick}
-        detail={detail}
-      /> */}
     </div>
   )
 }
