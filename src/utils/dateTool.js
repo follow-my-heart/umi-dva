@@ -3,7 +3,7 @@ let moment = require('moment');
 /**
  * @function formatMonthData - 输入时间戳, 输出对应月份的日期数据
  * @param {Date} date - Date()对象
- * @returns {{inputDate: string, startTime: string, endTime: string, data: [{time: string, thisMonth: boolean, year: number, month: number, day: number}]}
+ * @returns {{inputDate: string, startTime: string, endTime: string, data: Map<'YYYY-MM-DD',{time: 'YYYY-MM-DD', thisMonth: boolean, isSelect: boolean, year: string, month: string, day: string, week: string, weekDay: number}>}
  */
 
 export const formatMonthData = date => {
@@ -12,9 +12,9 @@ export const formatMonthData = date => {
     const firstDayWeekIndex = formatWeekIndex(firstDayDate.getDay());
     // 本月总共天数
     const daysInMonth = moment(date).daysInMonth();
-    // 日历数组
+    // 日历Map
     let outDay, time, data = new Map();
-    
+
     for (let i = 0; i < 42; i++) {
         outDay = moment(firstDayDate).add(i - firstDayWeekIndex, 'days');
         time = outDay.format('YYYY-MM-DD');
@@ -52,7 +52,7 @@ export const countDateTag = (type, date, n) => {
 /**
  * @function formatWeekData - 输入时间戳, 输出对应周的日期数据
  * @param {Date} date - Date()对象
- * @returns {{inputDate: string, startTime: string, endTime: string, data: [{time: string, year: number, month: number, day: number}]}
+ * @returns {{inputDate: string, startTime: string, endTime: string, data: Map<'YYYY-MM-DD',{time: 'YYYY-MM-DD', thisMonth: boolean, isSelect: boolean, year: string, month: string, day: string, week: string, weekDay: number}>}
  */
 
 export const formatWeekData = date => {
