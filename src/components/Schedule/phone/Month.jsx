@@ -18,7 +18,7 @@ const Month = ({ data, today, onClick }) => {
                 onClick={() => onClick(value, key)}
             >
                 <div className={styles.day}>{value.day}</div>
-                <div className={styles.lesson}>{value.text}</div>
+                <div className={styles.text}>{value.text}</div>
             </div>)
         });
 

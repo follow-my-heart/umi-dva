@@ -53,9 +53,10 @@ export default {
   ],
   proxy: {
     "/dayi": {
-      "target": "http://1v1-teacher-test.xueba100.com",
+      // "target": "http://rd08-classroom.qadev.xuebadev.com",
       // "target": "http://qa33-teacher.xuebadev.com",
       // "target": 'http://teacher.wenba.com/',
+      "target": 'http://1v1-teacher-test.xueba100.com',
       "changeOrigin": true
       // "pathRewrite": { "^/api": "" }
     }

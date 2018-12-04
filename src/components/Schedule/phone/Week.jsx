@@ -4,8 +4,10 @@ import { formatInterval } from '../../../utils/dateTool'
 const header = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'].map(v =>
     <div key={v} className={styles.weekGrid}>{v}</div>);
 
-const Week = ({ data, today, onClick }) => {
-    if (data) {
+const Week = ({ date, today, onClick }) => {
+
+    if (date) {
+        const { data } = date;
         let content = [];
         data.forEach((value, key) => {
             let gird = [];

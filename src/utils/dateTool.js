@@ -7,68 +7,28 @@ let moment = require('moment');
  */
 
 export const formatMonthData = date => {
-    const year = date.getFullYear();
-    const month = date.getMonth();
     // 本月第一天
-    const firstDayDate = new Date(year, month, 1);
+    const firstDayDate = new Date(date.getFullYear(), date.getMonth(), 1);
     const firstDayWeekIndex = formatWeekIndex(firstDayDate.getDay());
-    // 本月最后一天
-    const lastDayDate = month === 11 ? new Date(year + 1, 0, 0) : new Date(year, month + 1, 0);
     // 本月总共天数
-    const monthDay = lastDayDate.getDate();
-    // 上月最后一天
-    const lastMonthDate = month === 0 ? new Date(year, 0, 0) : new Date(year, month, 0);
-    // 上月总天数
-    const lastMonthDay = lastMonthDate.getDate();
-    // 本月加上月天数
-    const dayNum = monthDay + firstDayWeekIndex;
-    // 下月第一天
-    const nextMonthDate = month === 11 ? new Date(year + 1, 0, 1) : new Date(year, month + 1, 1);
-    // 开始日期
-    const startYear = lastMonthDate.getFullYear();
-    const startMonth = repairNum(lastMonthDate.getMonth() + 1);
-    const startDay = lastMonthDay - firstDayWeekIndex + 1;
-    // 结束日期
-    const endYear = nextMonthDate.getFullYear();
-    const endMonth = repairNum(nextMonthDate.getMonth() + 1);
-    const endDay = repairNum(42 - dayNum);
+    const daysInMonth = moment(date).daysInMonth();
     // 日历数组
-    let data = new Map();
-    let time = '';
-    for (let i = 0; i < firstDayWeekIndex; i++) {
-        time = `${startYear}-${startMonth}-${startDay + i}`;
+    let outDay, time, data = new Map();
+    
+    for (let i = 0; i < 42; i++) {
+        outDay = moment(firstDayDate).add(i - firstDayWeekIndex, 'days');
+        time = outDay.format('YYYY-MM-DD');
         data.set(time, {
             time,
-            thisMonth: false,
+            thisMonth: i >= firstDayWeekIndex && i < daysInMonth + firstDayWeekIndex,
             isSelect: false,
-            year: startYear,
-            month: startMonth,
-            day: startDay + i,
+            year: outDay.format('YYYY'),
+            month: outDay.format('M'),
+            day: outDay.format('D'),
+            week: formatWeekMap(outDay.day()),
+            weekDay: outDay.day(),
         })
     }
-    for (let i = 0; i < monthDay; i++) {
-        time = `${year}-${repairNum(month + 1)}-${repairNum(1 + i)}`;
-        data.set(time, {
-            time,
-            thisMonth: true,
-            isSelect: false,
-            year,
-            month: repairNum(month + 1),
-            day: 1 + i,
-        })
-    }
-    for (let i = 0; i < endDay; i++) {
-        time = `${endYear}-${endMonth}-${repairNum(1 + i)}`;
-        data.set(time, {
-            time,
-            thisMonth: false,
-            isSelect: false,
-            year: endYear,
-            month: endMonth,
-            day: 1 + i,
-        })
-    }
-
     return {
         inputDate: moment(date).format('YYYY-MM-DD'),
         startTime: [...data.values()][0].time,
@@ -97,20 +57,20 @@ export const countDateTag = (type, date, n) => {
 
 export const formatWeekData = date => {
     const weekNum = formatWeekIndex(date.getDay());
-    let inputDay = moment(date);
-    let data = new Map();
-    let time = '';
+    let inputDay, time, data = new Map();
+
     for (let i = 0; i < 7; i++) {
         inputDay = moment(date).add(i - weekNum, 'days');
         time = inputDay.format('YYYY-MM-DD');
         data.set(time, {
             time,
             year: inputDay.format('YYYY'),
-            month: inputDay.format('MM'),
-            day: inputDay.format('MM.DD'),
+            month: inputDay.format('M'),
+            day: inputDay.format('D'),
+            week: formatWeekMap(inputDay.day()),
+            weekDay: inputDay.day(),
         })
     }
-
     return {
         inputDate: moment(date).format('YYYY-MM-DD'),
         startTime: [...data.values()][0].time,
@@ -118,6 +78,20 @@ export const formatWeekData = date => {
         data,
     }
 };
+export const formatWeekMap = n => {
+    let week = '';
+    switch (n) {
+        case 0: week = '周日'; break;
+        case 1: week = '周一'; break;
+        case 2: week = '周二'; break;
+        case 3: week = '周三'; break;
+        case 4: week = '周四'; break;
+        case 5: week = '周五'; break;
+        case 6: week = '周六'; break;
+    }
+    return week
+}
+
 /**@function formatWeekIndex - 周一到周日序列*/
 
 export const formatWeekIndex = n => n === 0 ? 6 : n - 1;

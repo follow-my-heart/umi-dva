@@ -18,6 +18,7 @@ const formatLessonData = (date, lesson) => {
             }
         })
     }
+    console.log(data)
     return data
 }
 const today = moment(new Date()).format('YYYY-MM-DD');
@@ -52,17 +53,18 @@ export default {
             if (data.has(today)) {
                 data.set(today, { ...data.get(today), isSelect: true, day: '今天' })
             }
-            // const res = yield call(getSchedule, JSON.stringify({ start_time: startTime, end_time: endTime, tid }));
-            // if (res.data && res.data.data && res.data.data.courses) {
-            //     data = formatLessonData(calendarData.data, res.data.data.courses);
-            // }
-            data = formatLessonData(calendarData.data, lesson.data.courses);
+            let date = { ...calendarData, data };
+            const res = yield call(getSchedule, JSON.stringify({ start_time: startTime, end_time: endTime
+                // , tid: "170000001"
+             }));
+            if (res.data && res.data.data) {
+                res.data.data.length === 0
+                    ? date = { ...calendarData, data, message: '没有课程安排哦' }
+                    : data = formatLessonData(calendarData.data, res.data.data.courses)
+            }
             yield put({
                 type: 'updateData',
-                payload: {
-                    tid, type, n, step, detail,
-                    date: { ...calendarData, data }
-                },
+                payload: { tid, type, n, step, detail, date },
             });
         },
         *changeSelect({ payload }, { put }) {
