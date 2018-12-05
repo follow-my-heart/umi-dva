@@ -3,7 +3,7 @@ let moment = require('moment');
 /**
  * @function formatMonthData - 输入时间戳, 输出对应月份的日期数据
  * @param {Date} date - Date()对象
- * @returns {{inputDate: string, startTime: string, endTime: string, data: Map<'YYYY-MM-DD',{time: 'YYYY-MM-DD', thisMonth: boolean, isSelect: boolean, year: string, month: string, day: string, week: string, weekDay: number}>}
+ * @returns {{inputDate: 'YYYY-MM-DD', startTime: 'YYYY-MM-DD', endTime: 'YYYY-MM-DD', data: Map<'YYYY-MM-DD',{time: 'YYYY-MM-DD', thisMonth: boolean, isSelect: boolean, year: number, month: number, day: number, week: string, weekDay: number}>}
  */
 
 export const formatMonthData = date => {
@@ -22,9 +22,9 @@ export const formatMonthData = date => {
             time,
             thisMonth: i >= firstDayWeekIndex && i < daysInMonth + firstDayWeekIndex,
             isSelect: false,
-            year: outDay.format('YYYY'),
-            month: outDay.format('M'),
-            day: outDay.format('D'),
+            year: parseInt(outDay.format('YYYY')),
+            month: parseInt(outDay.format('M')),
+            day: parseInt(outDay.format('D')),
             week: formatWeekMap(outDay.day()),
             weekDay: outDay.day(),
         })
@@ -52,7 +52,7 @@ export const countDateTag = (type, date, n) => {
 /**
  * @function formatWeekData - 输入时间戳, 输出对应周的日期数据
  * @param {Date} date - Date()对象
- * @returns {{inputDate: string, startTime: string, endTime: string, data: Map<'YYYY-MM-DD',{time: 'YYYY-MM-DD', thisMonth: boolean, isSelect: boolean, year: string, month: string, day: string, week: string, weekDay: number}>}
+ * @returns {{inputDate: 'YYYY-MM-DD', startTime: 'YYYY-MM-DD', endTime: 'YYYY-MM-DD', data: Map<'YYYY-MM-DD',{time: 'YYYY-MM-DD', thisMonth: boolean, isSelect: boolean, year: number, month: number, day: number, week: string, weekDay: number}>}
  */
 
 export const formatWeekData = date => {
@@ -64,9 +64,9 @@ export const formatWeekData = date => {
         time = inputDay.format('YYYY-MM-DD');
         data.set(time, {
             time,
-            year: inputDay.format('YYYY'),
-            month: inputDay.format('M'),
-            day: inputDay.format('D'),
+            year: parseInt(inputDay.format('YYYY')),
+            month: parseInt(inputDay.format('M')),
+            day: parseInt(inputDay.format('D')),
             week: formatWeekMap(inputDay.day()),
             weekDay: inputDay.day(),
         })
@@ -78,6 +78,10 @@ export const formatWeekData = date => {
         data,
     }
 };
+/**@function formatWeekMap - 输出周一 ~ 周日
+ * @param {number} n - new Date().getDay获得的数字
+*/
+
 export const formatWeekMap = n => {
     let week = '';
     switch (n) {
@@ -104,7 +108,7 @@ export const repairNum = n => n < 10 ? `0${n}` : n;
  * @function formatInterval - 格式化开始结束时间, 区分上午下午晚上
  * @param {string} s - 开始时间
  * @param {string} e - 结束时间
- * @returns {{interval: string, start: string, end: string, section: string}} - 标记时间Date对象
+ * @returns {{interval: 'HH:mm-HH:mm', start: 'HH:mm', end: 'HH:mm', section: string}} - 标记时间Date对象
  */
 
 export const formatInterval = (s, e) => {

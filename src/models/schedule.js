@@ -18,7 +18,6 @@ const formatLessonData = (date, lesson) => {
             }
         })
     }
-    console.log(data)
     return data
 }
 const today = moment(new Date()).format('YYYY-MM-DD');
@@ -46,17 +45,18 @@ export default {
         *changeData({ payload }, { call, put }) {
             const { tid, type, n, step, detail } = payload;
             const calendarData = type === 'weeks'
-                ? formatWeekData(countDateTag(type, new Date(), n))
-                : formatMonthData(countDateTag(type, new Date(), n))
+                ? formatWeekData(countDateTag(type, new Date(2017, 7, 1), n))
+                : formatMonthData(countDateTag(type, new Date(2017, 7, 1), n))
             const { startTime, endTime } = calendarData;
             let data = calendarData.data;
             if (data.has(today)) {
                 data.set(today, { ...data.get(today), isSelect: true, day: '今天' })
             }
             let date = { ...calendarData, data };
-            const res = yield call(getSchedule, JSON.stringify({ start_time: startTime, end_time: endTime
+            const res = yield call(getSchedule, JSON.stringify({
+                start_time: startTime, end_time: endTime
                 // , tid: "170000001"
-             }));
+            }));
             if (res.data && res.data.data) {
                 res.data.data.length === 0
                     ? date = { ...calendarData, data, message: '没有课程安排哦' }
@@ -68,10 +68,7 @@ export default {
             });
         },
         *changeSelect({ payload }, { put }) {
-            yield put({
-                type: 'updateData',
-                payload,
-            });
+            yield put({ type: 'updateData', payload });
         },
     },
     reducers: {

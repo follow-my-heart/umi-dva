@@ -5,7 +5,6 @@ import { connect } from 'dva';
 const mySchedule = ({ schedule, dispatch }) => {
 
   const { tid, type, today, date, n, step, detail, selectKey } = schedule;
-  let { data } = date;
   const changeType = (newType) => {
     dispatch({
       type: 'schedule/changeData',
@@ -21,6 +20,7 @@ const mySchedule = ({ schedule, dispatch }) => {
   }
 
   const onClick = (value, key) => {
+    let { data } = date;
     if (type === 'weeks') {
 
     } else {

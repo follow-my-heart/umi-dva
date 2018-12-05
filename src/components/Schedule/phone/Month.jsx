@@ -1,10 +1,10 @@
 import styles from './schedule.less'
 
 const header = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'].map(v =>
-    <div key={v} className={styles.weekGrid}>{v}</div>);
+    <div key={v} className={styles.headerGrid}>{v}</div>);
 
 const Month = ({ data, today, onClick }) => {
-
+    
     if (data) {
         let gird = [];
         data.forEach((value, key) => {
@@ -22,9 +22,9 @@ const Month = ({ data, today, onClick }) => {
             </div>)
         });
 
-        return <div className={styles.phoneMonth}>
-            <div className={styles.header}>{header}</div>
-            <div className={styles.content}>{gird}</div>
+        return <div className={styles.month}>
+            <div className={styles.monthHeader}>{header}</div>
+            <div className={styles.monthContent}>{gird}</div>
         </div>
     } else return null
 };

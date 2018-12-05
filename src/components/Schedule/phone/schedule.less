@@ -1,174 +1,168 @@
 // @base-color: #000;
 @base-color: #2A89FF;
-// @base-color: red;
 @8: fade(@base-color, 8%);
-@10: fade(@base-color, 10%);
-@15: fade(@base-color, 15%);
-@20: fade(@base-color, 20%);
-@30: fade(@base-color, 30%);
 @32: fade(@base-color, 32%);
-@40: fade(@base-color, 40%);
-@50: fade(@base-color, 50%);
 @56: fade(@base-color, 56%);
-@60: fade(@base-color, 60%);
-@80: fade(@base-color, 80%);
-.phoneSchedule {
-    width: 100%;
-    .title {
-        padding: 15px 0 0 20px;
-    }
+.schedule {
+  width: 100%;
+  .title {
+    padding: 15px 0 0 20px;
+  }
 }
 
-.scheduleHeader {
+.header {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #EAEDEF;
+  .type {
+    position: absolute;
+    height: 30px;
+    display: flex;
+    left: 20px;
+    top: 15px;
+    .button {
+      width: 32px;
+      line-height: 30px;
+      text-align: center;
+      margin-right: 10px;
+      border: 1px solid #EAEDEF;
+      border-radius: 4px;
+      color: @base-color;
+      .select {
+        width: 32px;
+        height: 30px;
+        color: #fff;
+        background: @base-color;
+        border-radius: 4px;
+      }
+    }
+  }
+  .switch {
+    height: 30px;
+    width: 120px;
+    border: 1px solid #EAEDEF;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    .cell {
+      width: 60px;
+      text-align: center;
+      cursor: pointer;
+      color: @base-color;
+    }
+  }
+}
+
+.month {
+  width: 100%;
+  .monthHeader {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    .headerGrid {
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      width: 100%;
+    }
+  }
+  .monthContent {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    .monthGird {
+      height: 60px;
+      line-height: 60px;
+      text-align: center;
+      width: 14.285%;
+      cursor: pointer;
+      color: #ccc;
+      .day {
+        height: 36px;
+        line-height: 60px;
+      }
+      .text {
+        height: 24px;
+        line-height: 24px;
+        font-size: 10px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        .cell {
+          width: 6px;
+          height: 6px;
+          margin: 1px;
+        }
+      }
+    }
+    .thisMonth {
+      color: #000;
+    }
+    .today {
+      color: @base-color;
+    }
+    .select {
+      background: #F7F8F9;
+    }
+  }
+}
+
+.week {
+  width: 100%;
+  .weekHeader {
     width: 100%;
     height: 60px;
     display: flex;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 1px solid #EAEDEF;
-    .type {
-        position: absolute;
-        height: 30px;
-        display: flex;
-        left: 20px;
-        top: 15px;
-        .button {
-            width: 32px;
-            line-height: 30px;
-            text-align: center;
-            margin-right: 10px;
-            border: 1px solid #EAEDEF;
-            border-radius: 4px;
-            color: @base-color;
-            .select {
-                width: 32px;
-                height: 30px;
-                color: #fff;
-                background: @base-color;
-                border-radius: 4px;
-            }
-        }
+    padding-top: 16px;
+    font-size: 12px;
+    .headerGird {
+      height: 60px;
+      text-align: center;
+      width: 100%;
     }
-    .switch {
-        height: 30px;
-        width: 120px;
-        border: 1px solid #EAEDEF;
-        border-radius: 8px;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        .cell {
-            width: 60px;
-            text-align: center;
-            cursor: pointer;
-            color: @base-color;
-        }
-    }
-}
-
-.phoneMonth {
+  }
+  .weekContent {
     width: 100%;
-    .header {
-        width: 100%;
-        height: 50px;
-        display: flex;
-        .weekGrid {
-            height: 50px;
-            line-height: 50px;
-            text-align: center;
-            width: 100%;
-        }
+    height: 100%;
+    display: flex;
+    .message {
+      width: 100%;
+      height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-    .content {
+    .list {
+      height: 100%;
+      width: 14.28%;
+      display: flex;
+      flex-direction: column;
+      font-size: 12px;
+      margin-left: 2px;
+      .cell {
         width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        .monthGird {
-            height: 60px;
-            line-height: 60px;
-            text-align: center;
-            width: 14.285%;
-            cursor: pointer;
-            color: #ccc;
-            .day {
-                height: 36px;
-                line-height: 60px;
-            }
-            .text {
-                height: 24px;
-                line-height: 24px;
-                font-size: 10px;
-                display: flex;
-                justify-content: center;
-                flex-wrap: wrap;
-                .cell {
-                    width: 6px;
-                    height: 6px;
-                    margin: 1px;
-                }
-            }
+        height: 60px;
+        padding: 3px 0 3px 3px;
+        margin-bottom: 2px;
+        .label {
+          width: 40px;
+          margin: 0 auto;
         }
-        .thisMonth {
-            color: #000;
-        }
-        .today {
-            color: @base-color;
-        }
-        .select {
-            background: #F7F8F9;
-        }
+      }
+      .morning {
+        background: @8;
+      }
+      .afternoon {
+        background: @32;
+      }
+      .night {
+        background: @56;
+      }
     }
-}
-
-.phoneWeek {
-    width: 100%;
-    .header {
-        width: 100%;
-        height: 30px;
-        display: flex;
-        padding-top: 16px;
-        .weekGrid {
-            height: 30px;
-            text-align: center;
-            width: 100%;
-        }
-    }
-    .content {
-        width: 100%;
-        display: flex;
-        .weekGrid {
-            height: 100%;
-            text-align: center;
-            width: 100%;
-            font-size: 10px;
-            width: 14.28%;
-            margin: 2px;
-            .lessonColumn {
-                display: flex;
-                flex-direction: column;
-                .morning {
-                    background: @8;
-                    padding-top: 5px;
-                    width: 100%;
-                    height: 60px;
-                    margin: 2px;
-                }
-                .afternoon {
-                    background: @32;
-                    padding-top: 5px;
-                    width: 100%;
-                    height: 60px;
-                    margin: 2px;
-                }
-                .night {
-                    background: @56;
-                    padding-top: 5px;
-                    width: 100%;
-                    height: 60px;
-                    margin: 2px;
-                }
-            }
-        }
-    }
+  }
 }

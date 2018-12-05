@@ -7,7 +7,7 @@ const Schedule = ({ date, today, type = 'weeks', changeType, changeNum, onClick,
     if (date) {
         const { data, inputDate } = date;
         const todayArr = inputDate.split('-');
-        return <div className={styles.phoneSchedule}>
+        return <div className={styles.schedule}>
             <Header date={date} type={type} changeType={changeType} changeNum={changeNum} />
             <div className={styles.title}>{`${todayArr[0]}年${todayArr[1]}月`}</div>
             {type === 'weeks'

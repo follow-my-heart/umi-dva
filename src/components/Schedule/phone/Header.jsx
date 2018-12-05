@@ -2,7 +2,7 @@ import styles from './schedule.less'
 
 export const Header = ({ date, type = 'weeks', changeType, changeNum }) => {
     if (date) {
-        return <div className={styles.scheduleHeader}>
+        return <div className={styles.header}>
             <div className={styles.type}>
                 {
                     [{ key: 'weeks', value: '周' }, { key: 'months', value: '月' }].map(v =>
