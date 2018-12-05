@@ -34,7 +34,6 @@ const mySchedule = ({ schedule, dispatch }) => {
     }
   }
   return (
-    <div>
       <Schedule
         type={type}
         date={date}
@@ -44,7 +43,6 @@ const mySchedule = ({ schedule, dispatch }) => {
         onClick={onClick}
         selectKey={selectKey}
       />
-    </div>
   )
 }
 

@@ -1,6 +1,6 @@
 import styles from './schedule.less'
 
-export const Header = ({ date, type = 'weeks', changeType, changeNum }) => {
+const Header = ({ date, type = 'weeks', changeType, changeNum }) => {
     if (date) {
         return <div className={styles.header}>
             <div className={styles.type}>
