@@ -7,9 +7,9 @@ export default () => {
         教材
       </div>
       <div className={styles.right}>
-        {/* <br />
+        <br />
         1<br />
-        1<br /> */}
+        1<br />
       </div>
     </div>
   )

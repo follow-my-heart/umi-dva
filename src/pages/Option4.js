@@ -1,9 +1,8 @@
 export default () => {
 
-    return (
-      <div >
-     4
+  return (
+    <div >
+      4
       </div>
-    )
-  }
-  
+  )
+}
