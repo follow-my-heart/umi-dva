@@ -1,4 +1,4 @@
-## umi + dva 实战
+## umi + dva 
 
 ```
 $ yarn global add umi
