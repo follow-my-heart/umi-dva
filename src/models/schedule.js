@@ -45,8 +45,8 @@ export default {
         *changeData({ payload }, { call, put }) {
             const { tid, type, n, step, detail } = payload;
             const calendarData = type === 'weeks'
-                ? formatWeekData(countDateTag(type, new Date(2017, 7, 1), n))
-                : formatMonthData(countDateTag(type, new Date(2017, 7, 1), n))
+                ? formatWeekData(countDateTag(type, new Date(), n))
+                : formatMonthData(countDateTag(type, new Date(), n))
             const { startTime, endTime } = calendarData;
             let data = calendarData.data;
             if (data.has(today)) {
