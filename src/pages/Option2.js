@@ -10,14 +10,14 @@ const mySchedule = ({ schedule, dispatch }) => {
       type: 'schedule/changeData',
       payload: { tid, step, detail, n: 0, type: newType },
     })
-  }
+  };
 
   const changeNum = (num) => {
     dispatch({
       type: 'schedule/changeData',
       payload: { tid, type, detail, step: num, n: num === 0 ? 0 : n + num },
     })
-  }
+  };
 
   const onClick = (value, key) => {
     let { data } = date;
@@ -33,7 +33,8 @@ const mySchedule = ({ schedule, dispatch }) => {
       })
     }
   }
-  return (
+  if (date) {
+    return (
       <Schedule
         type={type}
         date={date}
@@ -43,7 +44,8 @@ const mySchedule = ({ schedule, dispatch }) => {
         onClick={onClick}
         selectKey={selectKey}
       />
-  )
+    )
+  } else return null
 }
 
 export default connect(({ schedule }) => ({

@@ -19,7 +19,7 @@ const formatLessonData = (date, lesson) => {
         })
     }
     return data
-}
+};
 const today = moment(new Date()).format('YYYY-MM-DD');
 export default {
 
@@ -67,10 +67,12 @@ export default {
                 payload: { tid, type, n, step, detail, date },
             });
         },
+
         *changeSelect({ payload }, { put }) {
             yield put({ type: 'updateData', payload });
         },
     },
+    
     reducers: {
         updateData(state, { payload }) {
             return { ...state, ...payload };
