@@ -21,7 +21,7 @@ const Header = ({ type = 'weeks', changeType, changeNum }) => {
 };
 
 Header.propTypes = {
-  type: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(['weeks', 'months']).isRequired,
   changeType: PropTypes.func.isRequired,
   changeNum: PropTypes.func.isRequired,
 };

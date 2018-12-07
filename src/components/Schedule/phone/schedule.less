@@ -115,9 +115,18 @@
     padding-top: 16px;
     font-size: 12px;
     .headerGird {
-      height: 60px;
       text-align: center;
       width: 100%;
+    }
+    .today {
+      color: @base-color;
+      .line {
+        height: 4px;
+        width: ~"calc(100% - 4px)";
+        margin: 0 auto;
+        background: @base-color;
+        border-radius: 5px;
+      }
     }
   }
   .weekContent {
@@ -136,13 +145,15 @@
       width: 14.28%;
       display: flex;
       flex-direction: column;
+      justify-content: center;
+      align-items: center;
       font-size: 12px;
-      margin-left: 2px;
+      margin-top: 4px;
       .cell {
-        width: 100%;
+        width: ~"calc(100% - 4px)";
         height: 60px;
         padding: 3px 0 3px 3px;
-        margin-bottom: 2px;
+        margin-bottom: 4px;
         .label {
           width: 40px;
           margin: 0 auto;

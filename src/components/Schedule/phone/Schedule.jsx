@@ -21,7 +21,7 @@ const Schedule = ({ date, today, type = 'weeks', changeType, changeNum, onClick 
 Schedule.propTypes = {
   date: PropTypes.object.isRequired,
   today: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(['weeks', 'months']).isRequired,
   changeType: PropTypes.func.isRequired,
   changeNum: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,

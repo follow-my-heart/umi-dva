@@ -7,10 +7,18 @@ const Week = ({ date, today, onClick }) => {
   const { data } = date;
   let header = [], content = [];
   data.forEach((value, key) => {
-    header.push(<div key={key} className={styles.headerGird}>
-      <div>{value.week}</div>
-      <div>{key === today ? '今天' : `${repairNum(value.month)}.${repairNum(value.day)}`}</div>
-    </div>);
+    if (key === today) {
+      header.push(<div key={key} className={[`${styles.today}`, `${styles.headerGird}`].join(' ')}>
+        <div>{value.week}</div>
+        <div>今天</div>
+        <div className={styles.line} />
+      </div>);
+    } else {
+      header.push(<div key={key} className={styles.headerGird}>
+        <div>{value.week}</div>
+        <div>{`${repairNum(value.month)}.${repairNum(value.day)}`}</div>
+      </div>);
+    }
     if (date.message) {
       content = <div className={styles.message}><span className={styles.image} />{date.message}</div>
     } else {
