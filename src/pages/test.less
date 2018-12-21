@@ -1,16 +1,37 @@
 // Option3
 .row {
-    width: 400px;
-    border: 1px solid #ccc;
-    display: flex;
-    .left {
-        border-right: 1px solid #ccc;
-        width: 100px;
+  width: 400px;
+  border: 1px solid #ccc;
+  display: flex;
+  .left {
+    border-right: 1px solid #ccc;
+    width: 100px;
+  }
+  .right {
+    height: 100%;
+    word-wrap: break-word;
+    word-break: normal;
+    width: calc(~"100% - 100px");
+  }
+}
+
+:global {
+  .integer {
+    .am-picker-col:last-child {
+      display: none;
     }
-    .right {
-        height: 100%;
-        word-wrap: break-word;
-        word-break: normal;
-        width: calc(~"100% - 100px");
+    .am-picker-col-item {
+      //   height: 60px;
     }
+    .am-picker-col-item-selected {
+      color: #2A89FF;
+    }
+  }
+  .am-picker-col-item-selected {
+    color: #2A89FF;
+  }
+}
+
+.list {
+  color: red;
 }
