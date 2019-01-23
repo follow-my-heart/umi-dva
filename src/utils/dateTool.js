@@ -41,7 +41,7 @@ export const formatMonthData = date => {
  * @function countDateTag - 计算点击 上下周/月的Date对象
  * @param {'weeks'|'months'} type - 周 | 月
  * @param {Date} date - Date()对象
- * @param {number} n - 上下周/月计数 
+ * @param {number} n - 上下周/月计数
  * @returns {Date} - 标记时间Date对象
  */
 
